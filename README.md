@@ -1,6 +1,10 @@
 RMIT 15 Puzzle Solver - README
 ==============================
 
+Description:
+-------------------------------------
+This project implements a 15-puzzle solver using the Iterative Deepening A* (IDA*) algorithm with the Manhattan Distance heuristic. It validates solvability, computes optimal move sequences, and supports step-by-step output for multiple test cases.
+
 Team Members and Contribution Scores:
 -------------------------------------
 - Chau Le Hoang (s3715228@rmit.edu.vn)           - 20% - contribute on...
