@@ -1,21 +1,6 @@
 public class Helper {
-
-    // O(1)
-    public static int getValue(int[] array, int index) {
-        if (index < 0 || index >= array.length) {
-            return -1;
-        }
-
-        return array[index];
-    }
-
-    // O(1)
-    public static int getValue(int[][] grid, int rowIndex, int columnIndex) {
-        if (rowIndex < 0 || rowIndex >= grid.length || columnIndex < 0 || columnIndex >= grid[0].length) {
-            return -1;
-        }
-        return grid[rowIndex][columnIndex];
-    }
+    public static final String INVALID_PUZZLE_MESSAGE = "Invalid move";
+    public static final String UNSOLVABLE_MESSAGE = "Puzzle is not solvable";
 
     //O(1)
     public static int to1DIndex(int rowIndex, int columnIndex, int columnCount) {
@@ -40,44 +25,6 @@ public class Helper {
         }
     }
 
-    //O(N)
-    // print 1d array
-    public static void print(int[] array) {
-        System.out.print("|");
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.print("|");
-        System.out.println();
-    }
-
-    //O(N)
-    public static void printWithIndex(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.println("[" + i + "]: " + array[i] + " ");
-        }
-    }
-
-    // O(N*N)
-    public static int[][] to2DArray(int[] grid1D) {
-        if (grid1D == null || grid1D.length == 0) {
-            return new int[0][0];
-        }
-
-        int size = (int) Math.sqrt(grid1D.length);
-        int[][] grid2D = new int[size][size];
-        int index = 0;
-
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                grid2D[i][j] = grid1D[index];
-                index++;
-            }
-        }
-
-        return grid2D;
-    }
-
     public static boolean isGoal(int[][] board) {
         int N = board.length;
         for (int i = 0; i < N; i++) {
@@ -98,6 +45,19 @@ public class Helper {
         return true;
     }
 
+    //avoid calculation i*N+j+1
+    public static boolean isGoalV2(int[][] board) {
+        int expected = 1;
+        int N = board.length;
+        for (int i = 0; i < N * N - 1; i++) {
+            if (board[i / N][i % N] != expected++) {
+                return false;
+            }
+        }
+
+        return board[N - 1][N - 1] == 0; // Ensure the last tile is blank (0)
+    }
+
     public static boolean isValid(int[][] puzzle) {
         int N = puzzle.length;
         int gridSize = N * N;
@@ -108,7 +68,7 @@ public class Helper {
                 int number = puzzle[i][j];
 
                 // Invalid number check
-                if (number < 0 || number > gridSize) {
+                if (number < 0 || number >= gridSize) {
                     return false;
                 }
 
@@ -143,7 +103,6 @@ public class Helper {
             }
         }
 
-
         // Count inversions & track blank row (counting from bottom)
         for (int i = 0; i < flattenedPuzzle.length; i++) {
             if (i % N == 0) { // Move to next row
@@ -173,5 +132,98 @@ public class Helper {
         } else { // Odd grid case
             return parityCheck;
         }
+    }
+
+    public static int[][] deepCopy(int[][] board) {
+        int N = board.length;
+        int[][] copy = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                copy[i][j] = board[i][j];
+            }
+        }
+
+        return copy;
+    }
+
+    public static int manhattan(int[][] grid) {
+        int N = grid.length;
+        int distance = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                int tile = grid[i][j];
+                if (tile != 0) {
+                    distance += calculateManhattan(i, j, tile, N);
+                }
+            }
+        }
+
+        return distance;
+    }
+
+    public static int calculateManhattan(int row, int column, int tile, int N) {
+        int targetRow = (tile - 1) / N;
+        int targetColumn = (tile - 1) % N;
+        return Math.abs(row - targetRow) + Math.abs(column - targetColumn);
+    }
+
+    public static void swap(int[][] board, int sourceRow, int sourceColumn, int destinationRow, int destinationColumn) {
+        int temp = board[sourceRow][sourceColumn];
+        board[sourceRow][sourceColumn] = board[destinationRow][destinationColumn];
+        board[destinationRow][destinationColumn] = temp;
+    }
+
+    public static int[] getBlankPosition(int[][] grid) {
+        int N = grid.length;
+        int blankRow = -1;
+        int blankColumn = -1;
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (grid[i][j] == 0) {
+                    blankRow = i;
+                    blankColumn = j;
+                    return new int[]{blankRow, blankColumn};
+                }
+            }
+        }
+        return new int[]{blankRow, blankColumn};
+    }
+
+    public static int[][] testSolution(int[][] puzzle, String solution) {
+        char[] moves = solution.toCharArray();
+        int[][] testBoard = Helper.deepCopy(puzzle);
+        int[] blankPosition = Helper.getBlankPosition(testBoard);
+        int blankRow = blankPosition[0];
+        int blankColumn = blankPosition[1];
+
+        for (int i = 0; i < moves.length; i++) {
+            char move = moves[i];
+            int newRow = blankRow;
+            int newColumn = blankColumn;
+
+            switch (move) {
+                case 'U':
+                    newRow++;
+                    break;
+                case 'D':
+                    newRow--;
+                    break;
+                case 'L':
+                    newColumn++;
+                    break;
+                case 'R':
+                    newColumn--;
+                    break;
+                default:
+                    throw new RuntimeException("Invalid move");
+            }
+
+            Helper.swap(testBoard, blankRow, blankColumn, newRow, newColumn);
+            blankRow = newRow;
+            blankColumn = newColumn;
+        }
+
+        return testBoard;
     }
 }

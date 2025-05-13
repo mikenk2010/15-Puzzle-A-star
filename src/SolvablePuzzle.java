@@ -1,6 +1,4 @@
-public final class SolveablePuzzle {
-
-
+public final class SolvablePuzzle {
     public static int[][] puzzle1 = {
             {14, 5, 7, 9},
             {2, 13, 11, 0},

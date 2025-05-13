@@ -28,7 +28,7 @@ public final class UnsolvablePuzzle {
             {1, 2, 3, 4},
             {5, 6, 7, 8},
             {9, 10, 11, 12},
-            {13, 14, 0, 15}
+            {14, 13, 0, 15}
     };
 
     // Duplicate puzzle (contains two '14' values)
@@ -38,8 +38,39 @@ public final class UnsolvablePuzzle {
             {9, 10, 11, 12},
             {13, 14, 14, 0} // Invalid due to duplicate '14'
     };
+    public static int[][] puzzleDuplicate2 = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 13, 14, 0} // Duplicate '13'
+    };
 
-    public static int[][][] testCases = {
+    public static int[][] puzzleMissing1 = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 0, 0} // Missing '15'
+    };
+
+    public static int[][] puzzleOutOfRange = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 16}, // '16' is out of the valid range (should be 0-15)
+            {13, 14, 15, 0}
+    };
+
+    public static int[][] puzzleIncorrectSum = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 0, 100} // '100' is an invalid value
+    };
+
+    public static int[][][] unsolvableTestCases = {
             puzzle1, puzzle2, puzzle3, puzzle4
+    };
+
+    public static int[][][] invalidTestCases = {
+            puzzleDuplicate1, puzzleDuplicate2, puzzleMissing1, puzzleOutOfRange, puzzleIncorrectSum
     };
 }
