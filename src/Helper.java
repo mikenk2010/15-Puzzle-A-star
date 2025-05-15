@@ -226,4 +226,25 @@ public class Helper {
 
         return testBoard;
     }
+
+    public static long hash(int[][] grid) {
+        int N = grid.length;
+        long hash = 0;
+        for (int i = 0; i < N * N; i++) {
+            int row = i / N;
+            int col = i % N;
+            hash = (hash << 4) | grid[row][col];
+        }
+        return hash;
+    }
+
+    public static int[][] unhash(long hash) {
+        int N = 4;
+        int[][] grid = new int[N][N];
+        for (int i = N * N - 1; i >= 0; i--) {
+            grid[i / N][i % N] = (int) (hash & 0xF);
+            hash >>= 4;
+        }
+        return grid;
+    }
 }

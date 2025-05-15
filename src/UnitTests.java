@@ -66,7 +66,6 @@ public class UnitTests {
 
     @Test
     public void isValid_should_return_true_for_valid_puzzles() {
-        int[][][] testCases = SolvablePuzzle.testCases;
         for (var testCase : solvableTestCases) {
             assertTrue(Helper.isValid(testCase), "isValid should return true for valid puzzles.");
         }
@@ -133,7 +132,6 @@ public class UnitTests {
 
     @Test
     public void isSolvable_should_return_true_for_valid_puzzles() {
-        int[][][] testCases = SolvablePuzzle.testCases;
         for (var testCase : solvableTestCases) {
             assertTrue(Helper.isSolvable(testCase), "isSolvable should return true for valid puzzles.");
         }
@@ -225,6 +223,18 @@ public class UnitTests {
     @Test
     public void testSolution_should_return_goal_board_for_IDAStar() {
         IDAStar idaStar = new IDAStar();
+
+        for (var testCase : solvableTestCases) {
+            String solution = idaStar.solve(testCase);
+            int[][] testBoard = Helper.testSolution(testCase, solution);
+
+            assertArrayEquals(GOAL, testBoard, "Solution should be the goal board.");
+        }
+    }
+
+    @Test
+    public void testSolution_should_return_goal_board_for_AStar() {
+        AStar idaStar = new AStar();
 
         for (var testCase : solvableTestCases) {
             String solution = idaStar.solve(testCase);
