@@ -1,27 +1,28 @@
 public class PerformanceTests {
     public static void main(String[] args) {
-        int[][][] solvablePuzzles = {
-                SolvablePuzzle.puzzle1,
-                SolvablePuzzle.puzzle2,
-                SolvablePuzzle.puzzle3,
-                SolvablePuzzle.puzzle4,
-                SolvablePuzzle.puzzle5
-        };
-
-        System.out.println(String.format("%-10s %-10s %-10s %-10s %-10s", "Puzzle", "isGoal(ns)", "result", "isGoalV2(ns)", "result"));
+        int[][][] solvablePuzzles = SolvablePuzzle.testCases;
+        IDAStar idaStar = new IDAStar();
+        AStar aStar = new AStar();
 
         for (int i = 0; i < solvablePuzzles.length; i++) {
+            System.out.println(String.format("%-10s %-15s %-10s %-50s", "Puzzle: " + (i + 1), "Time(ns)", "isGoal", "Moves"));
             long start = System.nanoTime();
-            boolean result1 = Helper.isGoal(solvablePuzzles[i]);
+            String moves1 = idaStar.solve(solvablePuzzles[i]);
             long end = System.nanoTime();
             long time1 = end - start;
+            int[][] solutionBoard1 = Helper.testSolution(solvablePuzzles[i], moves1);
+            boolean isGoal1 = Helper.isGoalV2(solutionBoard1);
+
+            System.out.println(String.format("%-10s %-15s %-10s %-50s", "IDA*", time1, isGoal1, moves1));
 
             start = System.nanoTime();
-            boolean result2 = Helper.isGoalV2(solvablePuzzles[i]);
+            String moves2 = aStar.solve(solvablePuzzles[i]);
             end = System.nanoTime();
             long time2 = end - start;
+            int[][] solutionBoard2 = Helper.testSolution(solvablePuzzles[i], moves1);
+            boolean isGoal2 = Helper.isGoalV2(solutionBoard2);
 
-            System.out.println(String.format("%-10d %-10s %-10s %-10s %-10s", i + 1, time1, result1, time2, result2 ));
+            System.out.println(String.format("%-10s %-15s %-10s %-50s", "A*", time2, isGoal2, moves2));
         }
     }
 }

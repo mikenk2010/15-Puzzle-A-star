@@ -1,24 +1,14 @@
 public class Helper {
-    public static final String INVALID_PUZZLE_MESSAGE = "Invalid move";
+    public static final String INVALID_PUZZLE_MESSAGE = "Invalid puzzle";
     public static final String UNSOLVABLE_MESSAGE = "Puzzle is not solvable";
-
-    //O(1)
-    public static int to1DIndex(int rowIndex, int columnIndex, int columnCount) {
-        return rowIndex * columnCount + columnIndex;
-    }
-
-    //O(1)
-    public static int[] to2DIndex(int index, int rowCount, int columnCount) {
-        return new int[]{index / rowCount, index % columnCount};
-    }
 
     //O(N*N)
     // print 2d array
-    public static void print(int[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
+    public static void print(int[][] board) {
+        for (int i = 0; i < board.length; i++) {
             System.out.print("|");
-            for (int j = 0; j < grid[i].length; j++) {
-                System.out.print(grid[i][j] + "\t");
+            for (int j = 0; j < board[i].length; j++) {
+                System.out.print(board[i][j] + "\t");
             }
             System.out.print("|");
             System.out.println();
@@ -60,15 +50,15 @@ public class Helper {
 
     public static boolean isValid(int[][] puzzle) {
         int N = puzzle.length;
-        int gridSize = N * N;
-        boolean[] seen = new boolean[gridSize]; // Track occurrences of numbers
+        int boardSize = N * N;
+        boolean[] seen = new boolean[boardSize]; // Track occurrences of numbers
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 int number = puzzle[i][j];
 
                 // Invalid number check
-                if (number < 0 || number >= gridSize) {
+                if (number < 0 || number >= boardSize) {
                     return false;
                 }
 
@@ -120,16 +110,16 @@ public class Helper {
         }
 
         // Solvability conditions
-        boolean isEvenGrid = (N % 2 == 0);
+        boolean isEvenboard = (N % 2 == 0);
         boolean parityCheck = (parity % 2 == 0);
 
-        if (isEvenGrid) { // Even grid case
+        if (isEvenboard) { // Even board case
             if (blankRow % 2 == 0) { // Blank is in odd row (from bottom)
                 return parityCheck;
             } else { // Blank is in even row (from bottom)
                 return !parityCheck;
             }
-        } else { // Odd grid case
+        } else { // Odd board case
             return parityCheck;
         }
     }
@@ -146,12 +136,12 @@ public class Helper {
         return copy;
     }
 
-    public static int manhattan(int[][] grid) {
-        int N = grid.length;
+    public static int manhattan(int[][] board) {
+        int N = board.length;
         int distance = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                int tile = grid[i][j];
+                int tile = board[i][j];
                 if (tile != 0) {
                     distance += calculateManhattan(i, j, tile, N);
                 }
@@ -173,14 +163,14 @@ public class Helper {
         board[destinationRow][destinationColumn] = temp;
     }
 
-    public static int[] getBlankPosition(int[][] grid) {
-        int N = grid.length;
+    public static int[] getBlankPosition(int[][] board) {
+        int N = board.length;
         int blankRow = -1;
         int blankColumn = -1;
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (grid[i][j] == 0) {
+                if (board[i][j] == 0) {
                     blankRow = i;
                     blankColumn = j;
                     return new int[]{blankRow, blankColumn};
@@ -227,24 +217,15 @@ public class Helper {
         return testBoard;
     }
 
-    public static long hash(int[][] grid) {
-        int N = grid.length;
-        long hash = 0;
-        for (int i = 0; i < N * N; i++) {
-            int row = i / N;
-            int col = i % N;
-            hash = (hash << 4) | grid[row][col];
+    public static String hash(int[][] board) {
+        StringBuilder sb = new StringBuilder();
+        int N = board.length;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                sb.append(board[i][j]);
+                if (i != N - 1 || j != N - 1) sb.append(',');
+            }
         }
-        return hash;
-    }
-
-    public static int[][] unhash(long hash) {
-        int N = 4;
-        int[][] grid = new int[N][N];
-        for (int i = N * N - 1; i >= 0; i--) {
-            grid[i / N][i % N] = (int) (hash & 0xF);
-            hash >>= 4;
-        }
-        return grid;
+        return sb.toString();
     }
 }

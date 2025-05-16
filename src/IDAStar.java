@@ -1,11 +1,11 @@
 public class IDAStar {
-    private static final int N = 4;
-    private static final int MAX_MOVES = 1_000_000;
+    private final int N = 4;
+    private final int MAX_MOVES = 1_000_000;
     // Directions: blank moves -> tile moves
     // dx,dy correspond to blank motion; moveChar is the tile move
-    private static final int[] dx = {1, -1, 0, 0};  // down, up, right, left of blank
-    private static final int[] dy = {0, 0, 1, -1};
-    private static final char[] moveChar = {'U', 'D', 'L', 'R'};
+    private final int[] dx = {1, -1, 0, 0};  // down, up, right, left of blank
+    private final int[] dy = {0, 0, 1, -1};
+    private final char[] moveChar = {'U', 'D', 'L', 'R'};
 
     private int[][] board = new int[N][N];
     private int threshold;

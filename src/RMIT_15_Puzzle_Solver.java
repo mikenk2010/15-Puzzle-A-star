@@ -1,9 +1,8 @@
-import java.io.IOException;
-
 public class RMIT_15_Puzzle_Solver {
-    public static void main(String[] args) throws IOException {
-        RMIT_15_Puzzle_Solver rmitSolver = new RMIT_15_Puzzle_Solver();
+    public static void main(String[] args) {
         IDAStar solver = new IDAStar();
+//        AStar solver = new AStar();
+//        AStarSolverZobrist solver = new AStarSolverZobrist();
         int[][][] solvableTests = SolvablePuzzle.testCases;
 
         for (int i = 0; i < solvableTests.length; i++) {
