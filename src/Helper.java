@@ -1,9 +1,12 @@
 public class Helper {
+    // Message constants for invalid or unsolvable puzzle states
     public static final String INVALID_PUZZLE_MESSAGE = "Invalid puzzle";
-    public static final String UNSOLVABLE_MESSAGE = "Puzzle is not solvable";
+    public static final String UNSOLVABLE_MESSAGE = "Puzzle is not solvable!";
 
-    //O(N*N)
-    // print 2d array
+    /**
+     * Print the 2D puzzle board in a human-readable format
+     * Time Complexity: O(N^2)
+     */
     public static void print(int[][] board) {
         for (int i = 0; i < board.length; i++) {
             System.out.print("|");
@@ -15,14 +18,19 @@ public class Helper {
         }
     }
 
+    /**
+     * Check if a board is in goal state using nested loops
+     * Goal state is numbers from 1 to 15, with last tile being 0
+     */
     public static boolean isGoal(int[][] board) {
         int N = board.length;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 // i * N + j is the position,
-                // i * N + j  + 1 is the expected number in that position,
+                // i * N + j  + 1 is the expected number in that position
                 int expected = i * N + j + 1;
                 if (expected == N * N) {
+                    // Last tile should be blank (0)
                     expected = 0;
                 }
 
@@ -35,7 +43,9 @@ public class Helper {
         return true;
     }
 
-    //avoid calculation i*N+j+1
+    /**
+     * Optimized goal check using single loop and position calculation
+     */
     public static boolean isGoalV2(int[][] board) {
         int expected = 1;
         int N = board.length;
@@ -48,6 +58,9 @@ public class Helper {
         return board[N - 1][N - 1] == 0; // Ensure the last tile is blank (0)
     }
 
+    /**
+     * Check if the puzzle contains all valid and unique values from 0 to N*N-1
+     */
     public static boolean isValid(int[][] puzzle) {
         int N = puzzle.length;
         int boardSize = N * N;
@@ -72,9 +85,14 @@ public class Helper {
             }
         }
 
-        return true; // No duplicates found
+        // All values are valid and unique, no duplicates found
+        return true;
     }
 
+    /**
+     * Determine if the puzzle is solvable using inversion count rules
+     * Returns true if puzzle is solvable
+     */
     public static boolean isSolvable(int[][] puzzle) {
         int N = puzzle.length;
         int[] flattenedPuzzle = new int[N * N];
@@ -124,6 +142,9 @@ public class Helper {
         }
     }
 
+    /**
+     * Return a deep copy of the board
+     */
     public static int[][] deepCopy(int[][] board) {
         int N = board.length;
         int[][] copy = new int[N][N];
@@ -136,6 +157,9 @@ public class Helper {
         return copy;
     }
 
+    /**
+     * Calculate the total Manhattan distance (heuristic for A*)
+     */
     public static int manhattan(int[][] board) {
         int N = board.length;
         int distance = 0;
@@ -151,18 +175,27 @@ public class Helper {
         return distance;
     }
 
+    /**
+     * Calculate Manhattan distance for a single tile from its goal position
+     */
     public static int calculateManhattan(int row, int column, int tile, int N) {
         int targetRow = (tile - 1) / N;
         int targetColumn = (tile - 1) % N;
         return Math.abs(row - targetRow) + Math.abs(column - targetColumn);
     }
 
+    /**
+     * Swap two tiles on the board
+     */
     public static void swap(int[][] board, int sourceRow, int sourceColumn, int destinationRow, int destinationColumn) {
         int temp = board[sourceRow][sourceColumn];
         board[sourceRow][sourceColumn] = board[destinationRow][destinationColumn];
         board[destinationRow][destinationColumn] = temp;
     }
 
+    /**
+     * Get the current position of the blank (0) tile
+     */
     public static int[] getBlankPosition(int[][] board) {
         int N = board.length;
         int blankRow = -1;
@@ -177,9 +210,14 @@ public class Helper {
                 }
             }
         }
+
+        // Return default if not found
         return new int[]{blankRow, blankColumn};
     }
 
+    /**
+     * Simulate applying a solution string to a puzzle and return the final board
+     */
     public static int[][] testSolution(int[][] puzzle, String solution) {
         char[] moves = solution.toCharArray();
         int[][] testBoard = Helper.deepCopy(puzzle);
@@ -192,6 +230,7 @@ public class Helper {
             int newRow = blankRow;
             int newColumn = blankColumn;
 
+            // Apply the corresponding move to blank
             switch (move) {
                 case 'U':
                     newRow++;
@@ -217,6 +256,9 @@ public class Helper {
         return testBoard;
     }
 
+    /**
+     * Generate a unique hash string representation of the board
+     */
     public static String hash(int[][] board) {
         StringBuilder sb = new StringBuilder();
         int N = board.length;

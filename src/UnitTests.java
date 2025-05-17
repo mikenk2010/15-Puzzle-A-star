@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTests {
 
+    // Goal state of the 15-puzzle
     private final int[][] GOAL = {
             {1, 2, 3, 4},
             {5, 6, 7, 8},
@@ -11,10 +12,12 @@ public class UnitTests {
             {13, 14, 15, 0}
     };
 
+    // Test case sets
     private final int[][][] solvableTestCases = SolvablePuzzle.testCases;
     private final int[][][] unsolvableTestCases = UnsolvablePuzzle.unsolvableTestCases;
     private final int[][][] invalidTestCases = UnsolvablePuzzle.invalidTestCases;
 
+    // isGoal should return false for solvable puzzles that are not yet solved
     @Test
     public void isGoal_should_return_false_for_solvable_puzzles() {
         for (var testCase : solvableTestCases) {
@@ -22,6 +25,7 @@ public class UnitTests {
         }
     }
 
+    // isGoal should return false for unsolvable puzzles
     @Test
     public void isGoal_should_return_false_for_unsolvable_puzzles() {
         for (var testCase : unsolvableTestCases) {
@@ -29,6 +33,7 @@ public class UnitTests {
         }
     }
 
+    // isGoalV2 should return false for unsolved but solvable puzzles
     @Test
     public void isGoalV2_should_return_false_for_solvable_puzzles() {
         for (var testCase : solvableTestCases) {
@@ -36,6 +41,7 @@ public class UnitTests {
         }
     }
 
+    // isGoalV2 should return false for unsolvable puzzles
     @Test
     public void isGoalV2_should_return_false_for_unsolvable_puzzles() {
         for (var testCase : unsolvableTestCases) {
@@ -43,6 +49,7 @@ public class UnitTests {
         }
     }
 
+    // isGoal should return true for actual goal states of various sizes
     @Test
     public void isGoal_should_return_true() {
         int[][] case1 = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
@@ -53,6 +60,7 @@ public class UnitTests {
         assertTrue(Helper.isGoal(case3));
     }
 
+    // isGoalV2 should return true for goal states
     @Test
     public void isGoalV2_should_return_true() {
         int[][] case1 = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
@@ -64,6 +72,7 @@ public class UnitTests {
         assertTrue(Helper.isGoalV2(case3));
     }
 
+    // isValid should return true for valid solvable puzzles
     @Test
     public void isValid_should_return_true_for_valid_puzzles() {
         for (var testCase : solvableTestCases) {
@@ -71,6 +80,7 @@ public class UnitTests {
         }
     }
 
+    // isValid should return true even for unsolvable but properly structured puzzles
     @Test
     public void isValid_should_return_true_for_unsolvable_puzzles() {
         for (var testCase : unsolvableTestCases) {
@@ -78,6 +88,7 @@ public class UnitTests {
         }
     }
 
+    // isValid should return false for puzzles with duplicates or invalid values
     @Test
     public void isValid_should_return_false_for_invalid_puzzles() {
         for (var testCase : invalidTestCases) {
@@ -85,6 +96,7 @@ public class UnitTests {
         }
     }
 
+    // getBlankPosition should find the correct blank (0) position
     @Test
     public void getBlankPosition_should_return_correct_position_for_valid_puzzles() {
         int[][] grid1 = {
@@ -105,6 +117,7 @@ public class UnitTests {
         assertArrayEquals(new int[]{0, 1}, Helper.getBlankPosition(grid2), "Blank tile should be at (0,1).");
     }
 
+    // getBlankPosition should return (-1,-1) if no blank is found
     @Test
     public void getBlankPosition_should_return_negative_one_for_invalid_puzzles() {
         int[][] gridNoBlank = {
@@ -117,9 +130,9 @@ public class UnitTests {
         assertArrayEquals(new int[]{-1, -1}, Helper.getBlankPosition(gridNoBlank), "Should return (-1,-1) if no blank tile.");
     }
 
+    // getBlankPosition should return the first blank tile found
     @Test
     public void getBlankPosition_should_return_first_blank_tile_position() {
-
         int[][] gridMultipleBlanks = {
                 {1, 2, 0, 4},
                 {5, 6, 7, 0},
@@ -130,6 +143,7 @@ public class UnitTests {
         assertArrayEquals(new int[]{0, 2}, Helper.getBlankPosition(gridMultipleBlanks), "Should return first blank tile position (0,2).");
     }
 
+    // isSolvable should return true for known solvable test cases
     @Test
     public void isSolvable_should_return_true_for_valid_puzzles() {
         for (var testCase : solvableTestCases) {
@@ -137,6 +151,7 @@ public class UnitTests {
         }
     }
 
+    // isSolvable should return false for known unsolvable test cases
     @Test
     public void isSolvable_should_return_false_for_invalid_puzzles() {
         for (var testCase : unsolvableTestCases) {
@@ -144,6 +159,7 @@ public class UnitTests {
         }
     }
 
+    // swap() should correctly swap two tile values
     @Test
     public void swap_should_swap_values() {
         int[][] actual = {
@@ -163,6 +179,7 @@ public class UnitTests {
         assertArrayEquals(expected, actual, "Helper.swap should swap values.");
     }
 
+    // Test individual Manhattan distance calculations
     @Test
     public void testCalculateManhattan() {
         int N = 4; // Grid size for 15-puzzle
@@ -180,6 +197,7 @@ public class UnitTests {
         assertEquals(6, Helper.calculateManhattan(3, 3, 1, N)); // Three rows & one column away
     }
 
+    // Test total Manhattan distance from board to goal
     @Test
     public void testManhattan() {
         int[][] grid1 = {
@@ -207,6 +225,7 @@ public class UnitTests {
         assertEquals(6, Helper.manhattan(grid3)); // Moving 1 back to [0,0] costs 6 moves
     }
 
+    // deepCopy() should return a deep, equal copy of a board
     @Test
     public void deepCopy_should_return_a_copy_of_the_original_array() {
         int[][] original = {
@@ -216,10 +235,10 @@ public class UnitTests {
                 {13, 14, 15, 0}
         };
         int[][] copy = Helper.deepCopy(original);
-
         assertArrayEquals(original, copy);
     }
 
+    // testSolution() should return the solved board when using IDA*
     @Test
     public void testSolution_should_return_goal_board_for_IDAStar() {
         IDAStar idaStar = new IDAStar();
@@ -227,11 +246,11 @@ public class UnitTests {
         for (var testCase : solvableTestCases) {
             String solution = idaStar.solve(testCase);
             int[][] testBoard = Helper.testSolution(testCase, solution);
-
             assertArrayEquals(GOAL, testBoard, "Solution should be the goal board.");
         }
     }
 
+    // testSolution() should return the solved board when using A*
     @Test
     public void testSolution_should_return_goal_board_for_AStar() {
         AStar idaStar = new AStar();
@@ -239,7 +258,6 @@ public class UnitTests {
         for (var testCase : solvableTestCases) {
             String solution = idaStar.solve(testCase);
             int[][] testBoard = Helper.testSolution(testCase, solution);
-
             assertArrayEquals(GOAL, testBoard, "Solution should be the goal board.");
         }
     }

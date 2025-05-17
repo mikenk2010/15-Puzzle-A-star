@@ -70,18 +70,20 @@ public final class SolvablePuzzle {
     };
 
     public static int[][][] testCases = {
-//            easy puzzles
+            // easy puzzles
             puzzle1,
             puzzle2,
             puzzle3,
             puzzle4,
             puzzle5,
 
-//            hard puzzles
-//            puzzle6,
-//            puzzle7,
-//            puzzle8,
-//            puzzle9,
-//            puzzle10
+            // hard puzzles
+            /*
+            puzzle6,
+            puzzle7,
+            puzzle8,
+            puzzle9,
+            puzzle10
+             */
     };
 }
