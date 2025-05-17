@@ -71,25 +71,13 @@ Each test case prints:
 - Move sequence to reach the goal (e.g., `"LLDRU"`)
 - Goal verification status (`true` or `false`)
 
-**Example output:**
+_Example output:_
+![image](https://github.com/user-attachments/assets/000f3b9e-109b-4ce6-8bfc-cafa7d881874)
 
-```
----- Test 1 ----
-Initial:
-|1	2	3	4	|
-|5	6	7	8	|
-|9	10	11	12	|
-|13	15	14	0	|
 
-Solution (5 moves, 0.65 ms):
-RULDR
+_Test Cases Result_
+![image](https://github.com/user-attachments/assets/797208b0-6ddf-4a1a-8d5f-cb6e93aecd4f)
 
-Final:
-|1	2	3	4	|
-|5	6	7	8	|
-|9	10	11	12	|
-|13	14	15	0	|
-```
 
 ---
 
