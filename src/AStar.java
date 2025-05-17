@@ -53,18 +53,11 @@ public class AStar {
                     Node neighbor = new Node(newGrid, newRow, newCol, newPath, newCost, direction);
                     if (neighbor.priority > MAX_MOVES) continue;
                     open.insert(neighbor);
-
-                    neighbor = null;
                 }
-
-                current = null;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(e.getStackTrace());
-        } finally {
-            open = null;
-            closed = null;
         }
 
         return "No solution";

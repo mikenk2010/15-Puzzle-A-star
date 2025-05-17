@@ -110,10 +110,10 @@ public class Helper {
         }
 
         // Solvability conditions
-        boolean isEvenboard = (N % 2 == 0);
+        boolean isEvenBoard = (N % 2 == 0);
         boolean parityCheck = (parity % 2 == 0);
 
-        if (isEvenboard) { // Even board case
+        if (isEvenBoard) { // Even board case
             if (blankRow % 2 == 0) { // Blank is in odd row (from bottom)
                 return parityCheck;
             } else { // Blank is in even row (from bottom)
