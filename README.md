@@ -12,8 +12,6 @@ The Java-based application solves the classic **15-puzzle** using two search alg
 
 Both implementations use the **Manhattan Distance heuristic** to evaluate move priorities. The program supports multiple test cases, includes a validity check for each puzzle, and prints execution time, solution steps, and goal validation.
 
-![15 Puzzle](https://github.com/user-attachments/assets/6c29879c-3d75-43b9-ad62-c4d482ed602e)
-
 ---
 
 ## 👥 Team Members and Contributions
