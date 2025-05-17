@@ -28,6 +28,23 @@ Both implementations use the **Manhattan Distance heuristic** to evaluate move p
 
 ---
 
+## 📃 Technical Report
+[Technical Report.docx](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
+
+---
+
+## 🎥 Demo
+https://github.com/user-attachments/assets/025d2d71-4629-4af6-ac3a-e4ba7c31fce2
+
+---
+
+## 📊 Presentation
+[Record Presentation.mp4](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
+
+[Presentation.pptx](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
+
+---
+
 ## 🛠 How to Compile and Run
 
 ### Requirements
@@ -119,21 +136,3 @@ _Test Cases Result_
 - Solvability is determined by inversion parity and blank row position.
 - Unit tests ensure correctness of goal detection, solvability, heuristics, and core functionality.
 
----
-
-## 📃 Technical Report
-[Technical Report.docx](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
-
----
-
-## 🎥 Demo
-https://github.com/user-attachments/assets/025d2d71-4629-4af6-ac3a-e4ba7c31fce2
-
----
-
-## 📊 Presentation
-[Record Presentation.mp4](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
-
-[Presentation.pptx](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
-
----
