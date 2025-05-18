@@ -26,8 +26,13 @@ Both implementations use the **Manhattan Distance heuristic** to evaluate move p
 
 ---
 
+## 📃 Entire OneDrive Folder
+[COSC3126 Algorithms and Analysis - Group Project](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBH0ed7RZy6sTjs8s_9gUYpA?e=rNlJAe)
+
+---
+
 ## 📃 Technical Report
-[Technical Report.docx](https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4139514_rmit_edu_vn/EiTQblvHHcNEmV4_WEk4f7gBpG9MWXdRSg-h7_LVAkdEzQ?e=dWfKUL)
+[Technical Report Writing - FINAL.pdf](https://rmiteduau-my.sharepoint.com/:b:/g/personal/s4139514_rmit_edu_vn/EWN8L9Jew7JElUhgD--T6qgBw4auo1uCA5FLT9bCH-YQtA?e=UKeO5k)
 
 ---
 
